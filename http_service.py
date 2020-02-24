@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 from urllib.parse import parse_qs
-
+import string
 
 PORT_NUMBER = 8080
 
@@ -47,8 +47,8 @@ class myHandler(BaseHTTPRequestHandler):
 	
 # Check whether two words have same letters and same amount of them 
 def same_letters(word1, word2):
-	list1 = [char for char in word1]
-	list2 = [char for char in word2]
+	list1 = [char.lower() for char in word1]
+	list2 = [char.lower() for char in word2]
 
 	dict1 = {char : list1.count(char) for char in list1}
 	dict2 = {char : list2.count(char) for char in list2}
@@ -64,7 +64,7 @@ def anagram_finder(words_list, trgt_word):
 	anagram_list = []
 
 	for word in words_list:
-		if same_letters(word, trgt_word):
+		if same_letters(word, trgt_word.lower()):
 			anagram_list.append(word)
 
 	if len(anagram_list) == 0:
